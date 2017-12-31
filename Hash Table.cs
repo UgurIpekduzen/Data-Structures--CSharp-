@@ -114,18 +114,6 @@ namespace HashTable
                 return true;
             }
             //Aranan eleman diğer iki eleman arasındaysa, aradan siler.
-            /*Node Temp = Data[Mode];
-            
-            while(Temp.Next != null)
-            {
-                if(Temp.Next.Key == Key)
-                {
-                    Temp.Next = Temp.Next.Next;
-                    return true;
-                }
-                Temp = Temp.Next;
-            }*/
-
             Node Temp = Get(Key);
 
             if(Temp != null)
