@@ -51,7 +51,6 @@ namespace HashTable
             this.Key = Key;
             Next = null;
         }
-
         public override string ToString() { return Key.ToString(); }
     }
 
