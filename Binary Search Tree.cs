@@ -69,7 +69,7 @@ namespace BinarySearchTree
         public void Remove(int e)
         {
             if (Root.Data == e) Root = null;
-            if (Root != null) Root.Add(e);
+            if (Root != null) Root.Remove(e);
             return;
         }
         public void Search(int e) { Root.Search(e); }
