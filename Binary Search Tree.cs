@@ -153,7 +153,7 @@ namespace BinarySearchTree
             }
             else if (Left != null)
             {
-                if (Parent.Left == this) Parent.Left = Right;
+                if (Parent.Left == this) Parent.Left = Left;
                 else Parent.Right = Left;
             }
         }
