@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,35 +7,35 @@ using static System.Console;
 namespace HashTable
 {
     class Program
-    {   
+    {
         static void Main(string[] args)
         {
             HashTable h1 = new HashTable();
 
             h1.Add(23);
-            h1.Add(53);
-            h1.Add(83);
-            h1.Add(73);
+            h1.Add(57);
+            h1.Add(88);
+            h1.Add(78);
             h1.Add(63);
 
-            h1.Add(2);
+            h1.Add(3);
             h1.Add(92);
             h1.Add(52);
-            h1.Add(32);
+            h1.Add(30);
             h1.Add(112);
             h1.Add(142);
-            
+
             //Silmeden önce
             h1.ShowData();
             WriteLine();
 
-            h1.Remove(53);
+            h1.Remove(78);
             h1.Remove(23);
             h1.Remove(63);
-
+            h1.Remove(30);
             h1.Remove(52);
             h1.Remove(32);
-            
+
             //Sildikten Sonra
             h1.ShowData();
         }
@@ -51,6 +51,7 @@ namespace HashTable
             this.Key = Key;
             Next = null;
         }
+
         public override string ToString() { return Key.ToString(); }
     }
 
@@ -69,7 +70,7 @@ namespace HashTable
         {
             Node NewNode = new Node(Key);
             int Mode = Key % MAX;
-            if(Data[Mode] == null)
+            if (Data[Mode] == null)
             {
                 Data[Mode] = NewNode;
                 return;
@@ -97,9 +98,9 @@ namespace HashTable
             if (Data[Mode] == null) return false;
 
             //Sondan siler.
-            if(Data[Mode].Next == null)
+            if (Data[Mode].Next == null)
             {
-                if(Data[Mode].Key == Key)
+                if (Data[Mode].Key == Key)
                 {
                     Data[Mode] = null;
                     return true;
@@ -107,25 +108,25 @@ namespace HashTable
                 return false;
             }
             //Baştan siler.
-            if(Data[Mode].Key == Key)
+            if (Data[Mode].Key == Key)
             {
                 Data[Mode] = Data[Mode].Next;
                 return true;
             }
             //Aranan eleman diğer iki eleman arasındaysa, aradan siler.
-            Node Temp = Get(Key);
 
-            if(Temp != null)
+            Node Temp = Data[Mode];
+
+            if (Temp.Next != null)
             {
-                if(Temp.Key == Key)
+                if (Temp.Next.Key == Key)
                 {
-                    Temp = Temp.Next;
+                    Temp.Next = Temp.Next.Next;
                     return true;
                 }
             }
             return false; // Hiçbir şey bulamazsa false döndür.
         }
-
         public void ShowData()
         {
             for (int i = 0; i < MAX; i++)
@@ -135,7 +136,7 @@ namespace HashTable
                 {
                     Write("i = " + i);
                     ShowDataCells(i);
-                }  
+                }
                 WriteLine();
             }
         }
