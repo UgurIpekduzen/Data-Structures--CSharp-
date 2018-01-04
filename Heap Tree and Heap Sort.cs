@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,24 +7,30 @@ using System.Threading.Tasks;
 namespace HeapTreeAndHeapSort
 {
     class Program
-    {   
+    {
         static void Main(string[] args)
         {
-            Heap h1 = new Heap();
-            int []arr = { 4, 7, 1, 78, 32, 67, 13, 25, 49, 80 };
+            Heap h1 = new Heap(8);
+            h1.Add(78);
+            h1.Add(35);
+            h1.Add(12);
+            h1.Add(99);
+            h1.Add(43);
+            h1.Add(9);
+            h1.Add(68);
+            h1.Add(85);
             
-             //Heap Sort
-            h1.BuildHeap(arr, 10);
-            while(h1.ElNum > 0)
+            //Heap Sort
+            int[] arr = { 4, 7, 1, 78, 13, 25, 49, 80 };
+            h1.BuildHeap(arr, arr.Length);
+            
+            while (h1.ElNum > 0)
             {
                 int temp = h1.Get();
                 Console.Write(temp + " ");
             }
-
-            for (int i = 0; i < arr.Length; i++) h1.Add(arr[i]);
-            
         }
-            
+
     }
 
     class Heap
@@ -33,7 +39,7 @@ namespace HeapTreeAndHeapSort
         int[] Data;
         int MAX;
 
-        public Heap (int MAX = 10)
+        public Heap(int MAX = 10)
         {
             ElNum = 0;
             this.MAX = MAX;
