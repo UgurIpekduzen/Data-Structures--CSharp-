@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +12,28 @@ namespace BinarySearchTree
         static void Main(string[] args)
         {
             BST Bst = new BST();
-            SetBST(Bst);
+            //SetBST(Bst);
 
-            Write("PreOrder: "); PreOrder(Bst.Root);
-            Write("\nInOrder: "); InOrder(Bst.Root);
-            Write("\nPostOrder: "); PostOrder(Bst.Root);
+            //Write("PreOrder: "); PreOrder(Bst.Root);
+            //Write("\nInOrder: "); InOrder(Bst.Root);
+            //Write("\nPostOrder: "); PostOrder(Bst.Root);
+
+            Bst.Add(45);
+            Bst.Add(35);
+            Bst.Add(12);
+            Bst.Add(5);
+            Bst.Add(56);
+            Bst.Add(37);
+            Bst.Add(60);
+
+            Bst.Search(70);
+            Bst.Search(37);
+
+            Bst.Remove(45);
+            Bst.Remove(30);
+            Bst.Remove(5);
+            Bst.Remove(70);
+            Bst.Remove(35);
         }
         static public BST SetBST(BST T)
         {
@@ -59,20 +76,19 @@ namespace BinarySearchTree
         public BST() { Root = null; }
         public void Add(int e)
         {
-            if(Root != null)
+            if (Root != null)
             {
                 Root.Add(e);
                 return;
             }
             Root = new BSTNode(e);
         }
-        public void Remove(int e)
+        public void Remove(int e) { Root.Remove(e); }
+        public void Search(int e)
         {
-            if (Root.Data == e) Root = null;
-            if (Root != null) Root.Add(e);
-            return;
+            if (Root.Search(e) != null) WriteLine(Root.Search(e).Data);
+            else WriteLine("Böyle bir sayı ağaçta yok");
         }
-        public void Search(int e) { Root.Search(e); }
     }
     class BSTNode
     {
@@ -85,9 +101,9 @@ namespace BinarySearchTree
         }
         public void Add(int Item)
         {
-            if(Item < Data)
+            if (Item < Data)
             {
-                if(Left != null)
+                if (Left != null)
                 {
                     Left.Add(Item);
                     return;
@@ -95,9 +111,9 @@ namespace BinarySearchTree
                 BSTNode New = new BSTNode(Item);
                 Left = New;
             }
-            else if(Item > Data)
+            else if (Item > Data)
             {
-                if(Right != null)
+                if (Right != null)
                 {
                     Right.Add(Item);
                     return;
@@ -108,12 +124,12 @@ namespace BinarySearchTree
         }
         public void Remove(int Item, BSTNode Parent = null)
         {
-            if(Item < Data)
+            if (Item < Data)
             {
-                if (Left != null) Left.Remove(Item,this);
+                if (Left != null) Left.Remove(Item, this);
                 return;
             }
-            else if(Item > Data)
+            else if (Item > Data)
             {
                 if (Right != null) Right.Remove(Item, this);
                 return;
@@ -124,18 +140,18 @@ namespace BinarySearchTree
                 if (Parent.Left == this) Parent.Left = null;
                 else Parent.Right = null;
             }
-            else if((Right != null) && (Left != null))
+            else if ((Right != null) && (Left != null))
             {
                 Data = Right.MinValue();
                 Right.Remove(Data, this);
                 return;
             }
-            else if(Right != null)
+            else if (Right != null)
             {
                 if (Parent.Left == this) Parent.Left = Right;
                 else Parent.Right = Right;
             }
-            else if(Left != null)
+            else if (Left != null)
             {
                 if (Parent.Left == this) Parent.Left = Right;
                 else Parent.Right = Left;
@@ -143,12 +159,12 @@ namespace BinarySearchTree
         }
         public BSTNode Search(int Item)
         {
-            if(Item < Data)
+            if (Item < Data)
             {
                 if (Left != null) return Left.Search(Item);
                 else return null;
             }
-            else if(Item > Data)
+            else if (Item > Data)
             {
                 if (Right != null) return Right.Search(Item);
                 else return null;
